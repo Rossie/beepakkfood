@@ -39,6 +39,13 @@ class Food extends CI_Controller {
 		else {
 			$allfood = $this->food_model->getAll($list);
 		}
+		if ($list == "product") {
+			foreach ($allfood as $food) {
+				$price = $this->food_model->getFoodPrice($food->id);
+				$food->price = $food->price_1000g;
+				$food->price_1000g = $price;
+			}
+		}
 		
         $this->load->view('food_index', array('allfood' => $allfood, "list" => $list));
 	}

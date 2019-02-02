@@ -3,7 +3,12 @@
 <div class="container">
 
 <div class="row">
-  <div class="col-lg-4 my-3 my-lg-0">
+  <div class="col mb-3">
+    <a href="<?php echo site_url(''); ?>" class="ml-auto"><i class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></a>  
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4 mb-3 my-lg-0">
     <form action="<?php echo $formaction; ?>" method="post">
       <div class="card border-primary">
         <div class="card-body">
@@ -37,7 +42,7 @@
           </form>   
         </div>    
         <div class="card-footer text-right">
-          <button type="submit" class="btn btn-primary" name="save_product" value="1">Ment</button>
+          <button type="submit" class="btn btn-primary" name="save_product" value="1"><i class="fa fa-check" aria-hidden="true"></i> Ment</button>
         </div>
           
       </div>
@@ -64,7 +69,7 @@
 
               <?php foreach ($ingredients as $ingr) : ?>
               <tr class="<?php echo empty($ingr->quantity_g) ? 'text-muted' : ''; ?>">
-                <td scope="row"><?php echo $ingr->name; ?></td>
+                <td scope="row"><a href="<?php echo site_url('edit/'. $ingr->id); ?>"><?php echo $ingr->name; ?></a></td>
                 <td>
                   <input type="text" class="form-control" name="quantity_g[<?php echo $ingr->id; ?>]" id="quantity_g" placeholder="Mennyiség (g)" value="<?php echo $ingr->quantity_g ;?>">
                 </td>
@@ -76,7 +81,7 @@
 
         </div>
         <div class="card-footer text-right">
-          <button type="submit" class="btn btn-primary">Ment</button>
+          <button type="submit" class="btn btn-primary"><i class="fa fa-check" aria-hidden="true"></i> Ment</button>
         </div>
       </div>
     </form>

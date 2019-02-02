@@ -87,6 +87,27 @@ class Food_model extends CI_Model {
 
         return $this->db->query($sql);
     }
+
+    function getFoodPrice($id) {
+        $items = $this->db->query("SELECT * 
+            FROM product p
+            INNER JOIN ingredients i ON (i.prod_2 = p.id)
+            WHERE i.prod_1 = ?", array($id))->result();
+        
+        $sumPrice = 0;
+        $sumWhgt = 0;
+        if ($items) {
+            foreach ($items as $item) {
+                $p = $item->quantity_g * ($item->price_1000g / 1000);
+                $sumWhgt += $item->quantity_g;
+                $sumPrice += $p;
+                // echo "<pre>{$item->prod_1}: {$item->name}: quantity_g:{$item->quantity_g} * (price_1000g:{$item->price_1000g} / 1000) = $p sum: $sumPrice"; ; echo "</pre>"; 
+            }
+        }
+        // echo "<br>sumW $sumWhgt";
+
+        return $sumPrice;
+    }
 }
 
 /* End of file ModelName.php */
