@@ -1,3 +1,13 @@
 .product-table th {
     border-top: none;
 }
+
+/* table > tbody > tr:nth-child(7) > td:nth-child(2) */
+.base-table tr.text-muted td {
+    border-top-width: 5px;
+}
+
+.base-table tr.text-muted ~ .text-muted td {
+    border-top: 1px solid #dee2e6;
+    background-color: initial;
+}

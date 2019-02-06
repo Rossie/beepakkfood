@@ -57,21 +57,24 @@
         <div class="card-body">
           <h4 class="card-title">Összetevők</h4>
           
-          <table class="table">
+          <table class="table base-table">
             <thead>
               <tr>
                 <th>Név</th>
                 <th>Mennyiség</th>
-                <th></th>
+                <th>Ár</th>
               </tr>
             </thead>
             <tbody>
 
               <?php foreach ($ingredients as $ingr) : ?>
-              <tr class="<?php echo empty($ingr->quantity_g) ? 'text-muted' : ''; ?>">
+              <tr id="row_<?php echo $ingr->id; ?>" class="<?php echo empty($ingr->quantity_g) ? 'text-muted' : ''; ?>">
                 <td scope="row"><a href="<?php echo site_url('edit/'. $ingr->id); ?>"><?php echo $ingr->name; ?></a></td>
                 <td>
-                  <input type="text" class="form-control" name="quantity_g[<?php echo $ingr->id; ?>]" id="quantity_g" placeholder="Mennyiség (g)" value="<?php echo $ingr->quantity_g ;?>">
+                  <input type="text" class="form-control weight <?php echo empty($ingr->quantity_g) ? 'text-muted' : ''; ?>" name="quantity_g[<?php echo $ingr->id; ?>]" id="quantity_g" placeholder="Mennyiség (g)" value="<?php echo $ingr->quantity_g ;?>" data-id="<?php echo $ingr->id; ?>">
+                </td>
+                <td>
+                  <span class="weight_price" data-price_1000g='<?php echo $ingr->price_1000g; ?>'><?php echo number_format($ingr->price_1000g * ($ingr->quantity_g / 1000)); ?></span>
                 </td>
               </tr>
               <?php endforeach; ?>
@@ -89,5 +92,7 @@
   <?php endif; ?>
 
 </div>
+
+<?php $footer_js = base_url("js/edit.js"); ?>
 
 <?php require_once(__DIR__.'/parts/_footer.php'); ?>
